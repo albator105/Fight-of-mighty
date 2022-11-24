@@ -174,8 +174,7 @@ def reinitialisation_data(path="data/data.json"):
                 "experience": 0,
                 "next_lvl_up":100,
                 "force": 10,
-                "vie_max": 100,
-
+                "vie_max": 100
             }
             json.dump(data, file)
         return True

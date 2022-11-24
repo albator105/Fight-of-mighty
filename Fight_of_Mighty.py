@@ -1,12 +1,13 @@
 
+from tool.storage import*
+chargeurstorage()
 #importation des libs
 import pygame,sys
 from GameData.Niveaux.World_1.niveau_1.niveau_1 import niveau_1
 niveau1 = niveau_1()
 #importation des outils
 from tool.button import Button
-from tool.storage import*
-chargeurstorage()
+
 
 #initialisation des composant de pygame
 pygame.init()
