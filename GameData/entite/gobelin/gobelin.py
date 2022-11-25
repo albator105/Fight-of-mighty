@@ -34,7 +34,9 @@ class Gobelin(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (111, 210, 46), position_barre_2)
         
     def deplacement_general(self,player_position):
-        if pygame.sprite.spritecollide(self, self.game.all_playeur, False):
+        if pygame.sprite.spritecollide(self, self.game.player.all_earthquake, False):
+            self.damage(self.game.player.earth_quake.degat)
+        elif pygame.sprite.spritecollide(self, self.game.all_playeur, False):
                 self.attack +=1
 
                 if self.facing == 1:
@@ -60,3 +62,4 @@ class Gobelin(pygame.sprite.Sprite):
             self.image = pygame.image.load("GameData/entite/gobelin/run/"+str(self.img)+"_left.png")
             self.rect.x -= self.vitesse
             self.facing == 2
+

@@ -179,22 +179,26 @@ def stat_menu():
         screen.blit(img_main_menu,(0,0))
         screen.blit(pygame.image.load("Background/menu_stat/stat_panel.png"),(100,100))
         data=obtenir_toute_data()
-        if (data["niveau"]) > 9999999999999999999999:
-            niveau_playeur = "9999999999999999999..."
+        if (data["niveau"]) > 99999999999999999999:
+            niveau_playeur = "99999999999999999..."
         else:
             niveau_playeur = str((data["niveau"]))
-        if (data["skill_point"]) > 9999999999999999999999:
-            skill_point_playeur = "9999999999999999999..."
+        if (data["skill_point"]) > 999999999999999999999:
+            skill_point_playeur = "999999999999999999..."
         else:
             skill_point_playeur = str((data["skill_point"]))
-        if (data["vie_max"]) > 9999999999999999999999:
-            vie_max_playeur = "9999999999999999999..."
+        if (data["vie_max"]) > 9999999999999999999:
+            vie_max_playeur = "9999999999999999..."
         else:
             vie_max_playeur = str((data["vie_max"]))
         if (data["force"]) > 9999999999999999999999:
             force_playeur = "9999999999999999999..."
         else:
             force_playeur = str((data["force"]))
+        if (data["mana"]) > 99999999999999999999:
+            mana_playeur = "99999999999999999..."
+        else:
+            mana_playeur = str((data["mana"]))
         niveau = pygame.font.Font("tool/police/font.ttf", 20).render((data["name"]), True,"Black")
         screen.blit(niveau, (150, 110))
         niveau = pygame.font.Font("tool/police/font.ttf", 20).render("Niveau : "+niveau_playeur, True,"Black")
@@ -205,6 +209,8 @@ def stat_menu():
         screen.blit(vie, (110, 180))
         force = pygame.font.Font("tool/police/font.ttf", 20).render("Force : "+force_playeur, True,"Black")
         screen.blit(force, (110, 200))
+        mana = pygame.font.Font("tool/police/font.ttf", 20).render("Mana : "+mana_playeur, True,"Black")
+        screen.blit(mana, (110, 220))
 
         retour = Button(
             image=None,
@@ -230,6 +236,14 @@ def stat_menu():
             base_color="Red",
             hovering_color="Red",
         )
+        Mana_UP = Button(
+            image=pygame.image.load("Background/menu_stat/button.png"),
+            pos=(1000, 300),
+            text_input="Mana UP",
+            font=Button.get_font(15),
+            base_color="Red",
+            hovering_color="Red",
+        )
 
         retour.changeColor(pos_souris)
         retour.update(screen)
@@ -237,6 +251,8 @@ def stat_menu():
         Force_UP.update(screen)
         Life_UP.changeColor(pos_souris)
         Life_UP.update(screen)
+        Mana_UP.changeColor(pos_souris)
+        Mana_UP.update(screen)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -252,6 +268,10 @@ def stat_menu():
                     if data["skill_point"] > 0:
                         stocke_data("skill_point",obtenir_data("skill_point")-1)
                         stocke_data("vie_max",obtenir_data("vie_max")+10)
+                if Mana_UP.checkForInput(pos_souris):
+                    if data["skill_point"] > 0:
+                        stocke_data("skill_point",obtenir_data("skill_point")-1)
+                        stocke_data("mana",obtenir_data("mana")+3)
         pygame.display.flip()
 main_menu()
 

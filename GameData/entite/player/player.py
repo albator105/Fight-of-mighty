@@ -1,5 +1,6 @@
-import pygame
+import pygame, time
 from tool.storage import*
+from GameData.entite.earthquake.earthquake import earthquake
 class Player(pygame.sprite.Sprite):
     def __init__(self,game):
         super().__init__()
@@ -8,6 +9,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 100
         self.rect.y = 600
+        self.facing = 1
         self.data = obtenir_toute_data()
         self.viemax = self.data["vie_max"]
         self.vie = self.data["vie_max"]
@@ -21,6 +23,19 @@ class Player(pygame.sprite.Sprite):
         self.need_exp = self.data["next_lvl_up"]
         self.xp = self.data["experience"]
         self.skill_point = self.data["skill_point"]
+        self.mana_max = self.data["mana"]
+        self.mana = self.mana_max
+        self.regen_mana = self.mana_max/1200
+        self.all_earthquake = pygame.sprite.Group()
+        self.earth_quake = earthquake(self,self.rect.x,self.rect.y,self.facing)
+
+
+    def earth_power__earthquake(self):
+        if not self.all_earthquake and self.mana >= 100 :
+            self.mana -= 100
+            self.all_earthquake.add(earthquake(self,self.rect.x,self.rect.y,self.facing))
+            earth = pygame.mixer.Sound("Music/sound/earthquake.mp3")
+            earth.play()
     
     def remover(self):
         for player in self.game.all_playeur:
@@ -39,6 +54,7 @@ class Player(pygame.sprite.Sprite):
             self.img = 1
         self.image = pygame.image.load("GameData/entite/player/run/"+str(self.img)+"_right.png")
         self.rect.x += self.vitesse
+        self.facing = 1
 
     def gauche(self):
         self.img += 1
@@ -46,6 +62,7 @@ class Player(pygame.sprite.Sprite):
             self.img = 1
         self.image = pygame.image.load("GameData/entite/player/run/"+str(self.img)+"_left.png")
         self.rect.x -= self.vitesse
+        self.facing = 2
 
 
     def idle(self,facing):
@@ -63,7 +80,7 @@ class Player(pygame.sprite.Sprite):
         if  facing == 1:
             if self.attaque > 7:
                 self.attaque = 1
-                hit = pygame.mixer.Sound("Music/sound/player_sword.mp3")
+                hit = pygame.mixer.Sound("Music/sound/sword_hit.mp3")
                 hit.play()
                 for gobelin in pygame.sprite.spritecollide(self, self.game.all_gobelin, False):
                     gobelin.damage(self.force)
@@ -86,25 +103,46 @@ class Player(pygame.sprite.Sprite):
         if self.xp >= self.need_exp:
             self.level += 1
             self.xp = int(self.xp - self.need_exp)
-            self.need_exp = int(self.need_exp*1.05)
+            if  self.level <= 50:
+                self.need_exp = int(self.need_exp*1.05)
+            if self.level > 50:
+                self.need_exp = int(self.need_exp*1.005)
+            if self.level > 100:
+                self.need_exp = int(self.need_exp*1.0005)
+            if self.level > 150:
+                self.need_exp = int(self.need_exp*1.00005)
             self.skill_point += 1
             stocke_data("niveau", self.level)
             stocke_data("next_lvl_up",self.need_exp)
             stocke_data("skill_point",self.skill_point)
         stocke_data("experience",self.xp)
-        lvl = pygame.font.Font("tool/police/font.ttf", 20).render(str(self.level), True, "Blue")
-        surface.blit(lvl, (310, 0))
         if self.vie < self.viemax:
             self.vie += self.regen_vie
         if self.vie > self.viemax:
             self.vie = self.viemax
-        position_barre_3 = [0, 20, self.xp / self.need_exp * 300, 20]
-        position_barre4 = [0, 20, self.need_exp / self.need_exp * 300, 20]
+        if self.mana < self.mana_max:
+            self.mana += self.regen_mana
+        if self.mana > self.mana_max:
+            self.mana = self.mana_max
+        position_barre_5 = [0, 80, self.mana / self.mana_max * 310, 10]
+        position_barre6 = [0, 80, self.mana_max / self.mana_max * 310, 10]
+        pygame.draw.rect(surface, (60, 63, 60), position_barre6)
+        pygame.draw.rect(surface, (49, 140, 231), position_barre_5)
+        position_barre_3 = [0, 60, self.xp / self.need_exp * 310, 20]
+        position_barre4 = [0, 60, self.need_exp / self.need_exp * 310, 20]
         pygame.draw.rect(surface, (60, 63, 60), position_barre4)
         pygame.draw.rect(surface, (49, 140, 231), position_barre_3)
-        position_barre_2 = [0, 0, self.vie / self.viemax * 300, 20]
-        position_barre = [0, 0, self.viemax / self.viemax * 300, 20]
+        position_barre_2 = [80, 17, self.vie / self.viemax * 415, 30]
+        position_barre = [80, 17, self.viemax / self.viemax * 415, 30]
         pygame.draw.rect(surface, (60, 63, 60), position_barre)
         pygame.draw.rect(surface, (111, 210, 46), position_barre_2)
-        xp = pygame.font.Font("tool/police/font.ttf", 20).render(str(self.xp)+"/"+str(self.need_exp), True,(240, 195, 0))
-        surface.blit(xp, (150, 20))
+        if self.level > 99999:
+            self.level_print = "99999."
+        else:
+            self.level_print = self.level
+
+        surface.blit(pygame.image.load("Background/in_game/gui.png"),(0,0))
+        surface.blit(pygame.font.Font("tool/police/font.ttf", 15).render(self.data["name"], True,"white"),(10,0))
+        surface.blit(pygame.font.Font("tool/police/font.ttf", 10).render("xp : "+str(self.xp)+"/"+str(self.need_exp), True, "white"), (50, 70))
+        surface.blit(pygame.font.Font("tool/police/font.ttf", 20).render(str(self.level_print), True, "White"), (460, 60))
+        surface.blit(pygame.font.Font("tool/police/font.ttf", 20).render("element", True, "White"), (320, 60))

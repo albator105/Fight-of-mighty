@@ -50,9 +50,12 @@ class niveau_1:
             for gobelin in self.game.all_gobelin:
                 gobelin.deplacement_general(self.game.player.rect.x)
                 gobelin.update_health_barre(self.screen)
+            for earthquake in self.game.player.all_earthquake:
+                earthquake.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
+            self.game.player.all_earthquake.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -63,6 +66,8 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_e) == True:
+                self.game.player.earth_power__earthquake()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
                 self.game.player.droite()
                 self.facing = 1
@@ -99,9 +104,13 @@ class niveau_1:
             for gobelin in self.game.all_gobelin:
                 gobelin.deplacement_general(self.game.player.rect.x)
                 gobelin.update_health_barre(self.screen)
+            for earthquake in self.game.player.all_earthquake:
+                earthquake.up_date()
+
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
+            self.game.player.all_earthquake.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -112,6 +121,8 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_e) == True:
+                self.game.player.earth_power__earthquake()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
                 self.game.player.droite()
                 self.facing = 1
@@ -147,9 +158,12 @@ class niveau_1:
             for gobelin in self.game.all_gobelin:
                 gobelin.deplacement_general(self.game.player.rect.x)
                 gobelin.update_health_barre(self.screen)
+            for earthquake in self.game.player.all_earthquake:
+                earthquake.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
+            self.game.player.all_earthquake.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -160,6 +174,8 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_e) == True:
+                self.game.player.earth_power__earthquake()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
                 self.game.player.droite()
                 self.facing = 1
@@ -195,9 +211,12 @@ class niveau_1:
             for gobelin in self.game.all_gobelin:
                 gobelin.deplacement_general(self.game.player.rect.x)
                 gobelin.update_health_barre(self.screen)
+            for earthquake in self.game.player.all_earthquake:
+                earthquake.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
+            self.game.player.all_earthquake.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -208,6 +227,8 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_e) == True:
+                self.game.player.earth_power__earthquake()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
                 self.game.player.droite()
                 self.facing = 1
