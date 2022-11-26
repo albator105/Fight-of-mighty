@@ -175,7 +175,8 @@ def reinitialisation_data(path="data/data.json"):
                 "next_lvl_up":100,
                 "force": 10,
                 "vie_max": 100,
-                "mana": 100
+                "mana": 100,
+                "element": "aucun"
             }
             json.dump(data, file)
         return True
@@ -207,7 +208,10 @@ def check_data(path="data/data.json"):
                             if isinstance(data["next_lvl_up"], int):
                                 if isinstance(data["name"], str):
                                     if isinstance(data["mana"], int):
-                                        return True
+                                        if isinstance(data["element"], str):
+                                            return True
+                                        else:
+                                            return False
                                     else:
                                         return False
                                 else:

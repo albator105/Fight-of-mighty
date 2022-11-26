@@ -36,7 +36,10 @@ class Gobelin(pygame.sprite.Sprite):
     def deplacement_general(self,player_position):
         if pygame.sprite.spritecollide(self, self.game.player.all_earthquake, False):
             self.damage(self.game.player.earth_quake.degat)
-        elif pygame.sprite.spritecollide(self, self.game.all_playeur, False):
+        if pygame.sprite.spritecollide(self, self.game.player.all_ice_spike, False):
+            self.damage(self.game.player.ice_spike.degat)
+            self.vitesse = 2
+        if pygame.sprite.spritecollide(self, self.game.all_playeur, False):
                 self.attack +=1
 
                 if self.facing == 1:

@@ -211,6 +211,8 @@ def stat_menu():
         screen.blit(force, (110, 200))
         mana = pygame.font.Font("tool/police/font.ttf", 20).render("Mana : "+mana_playeur, True,"Black")
         screen.blit(mana, (110, 220))
+        element = pygame.font.Font("tool/police/font.ttf", 20).render("Type : "+data["element"], True,"Black")
+        screen.blit(element, (110, 240))
 
         retour = Button(
             image=None,
@@ -244,6 +246,14 @@ def stat_menu():
             base_color="Red",
             hovering_color="Red",
         )
+        Element_button = Button(
+            image=pygame.image.load("Background/menu_stat/button.png"),
+            pos=(1080, 600),
+            text_input="Elements",
+            font=Button.get_font(15),
+            base_color="Red",
+            hovering_color="Red",
+        )
 
         retour.changeColor(pos_souris)
         retour.update(screen)
@@ -253,6 +263,8 @@ def stat_menu():
         Life_UP.update(screen)
         Mana_UP.changeColor(pos_souris)
         Mana_UP.update(screen)
+        Element_button.changeColor(pos_souris)
+        Element_button.update(screen)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -260,6 +272,8 @@ def stat_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if retour.checkForInput(pos_souris):
                     main_menu()
+                if Element_button.checkForInput(pos_souris):
+                    element_select()
                 if Force_UP.checkForInput(pos_souris):
                     if data["skill_point"] > 0:
                         stocke_data("skill_point",obtenir_data("skill_point")-1)
@@ -273,5 +287,80 @@ def stat_menu():
                         stocke_data("skill_point",obtenir_data("skill_point")-1)
                         stocke_data("mana",obtenir_data("mana")+3)
         pygame.display.flip()
+def element_select():
+    img_main_menu = pygame.transform.scale(pygame.image.load("Background/menu_stat/stat_menu.png"),(screen.get_width(),screen.get_height()))
+    while True:
+        pos_souris = pygame.mouse.get_pos()
+        clock.tick(10)
+        screen.blit(img_main_menu,(0,0))
+        Fire = Button(
+            image=pygame.transform.scale(pygame.image.load("Background/menu_stat/icon/fire_icon.png"),(100,100)),
+            pos=(180, 150),
+            text_input="FEU",
+            font=Button.get_font(20),
+            base_color="Black",
+            hovering_color="Red",
+        )
+        wind = Button(
+            image=pygame.transform.scale(pygame.image.load("Background/menu_stat/icon/wind_icon.png"),(100,100)),
+            pos=(480, 150),
+            text_input="AIR",
+            font=Button.get_font(20),
+            base_color="Black",
+            hovering_color="Green",
+        ) 
+        earth= Button(
+            image=pygame.transform.scale(pygame.image.load("Background/menu_stat/icon/earth_icon.png"),(100,100)),
+            pos=(780, 150),
+            text_input="Terre",
+            font=Button.get_font(20),
+            base_color="Black",
+            hovering_color="Brown",
+        )
+        eau= Button(
+            image=pygame.transform.scale(pygame.image.load("Background/menu_stat/icon/water_icon.png"),(100,100)),
+            pos=(1080, 150),
+            text_input="EAU",
+            font=Button.get_font(20),
+            base_color="Black",
+            hovering_color="Blue",
+        )       
+
+        retour = Button(
+            image=None,
+            pos=(100, 700),
+            text_input="retour",
+            font=Button.get_font(30),
+            base_color="Red",
+            hovering_color=(131, 166, 151),
+        )
+
+        retour.changeColor(pos_souris)
+        retour.update(screen)
+        earth.changeColor(pos_souris)
+        earth.update(screen)
+        wind.changeColor(pos_souris)
+        wind.update(screen)
+        eau.changeColor(pos_souris)
+        eau.update(screen)
+        Fire.changeColor(pos_souris)
+        Fire.update(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if retour.checkForInput(pos_souris):
+                    stat_menu()
+                if earth.checkForInput(pos_souris):
+                    stocke_data("element","earth")
+                if eau.checkForInput(pos_souris):
+                    stocke_data("element","water")
+                if Fire.checkForInput(pos_souris):
+                    stocke_data("element","fire")
+                if wind.checkForInput(pos_souris):
+                    stocke_data("element","wind")
+        pygame.display.flip()
+
 main_menu()
 

@@ -1,6 +1,7 @@
 import pygame, time
 from tool.storage import*
 from GameData.entite.earthquake.earthquake import earthquake
+from GameData.entite.ice_spike.ice_spike import ice_spike
 class Player(pygame.sprite.Sprite):
     def __init__(self,game):
         super().__init__()
@@ -28,14 +29,24 @@ class Player(pygame.sprite.Sprite):
         self.regen_mana = self.mana_max/1200
         self.all_earthquake = pygame.sprite.Group()
         self.earth_quake = earthquake(self,self.rect.x,self.rect.y,self.facing)
+        self.all_ice_spike = pygame.sprite.Group()
+        self.ice_spike = ice_spike(self,self.rect.x,self.rect.y,self.facing)
 
 
-    def earth_power__earthquake(self):
-        if not self.all_earthquake and self.mana >= 100 :
-            self.mana -= 100
-            self.all_earthquake.add(earthquake(self,self.rect.x,self.rect.y,self.facing))
-            earth = pygame.mixer.Sound("Music/sound/earthquake.mp3")
-            earth.play()
+    def power_1(self):
+        if self.data["element"] == "aucun":
+            pass
+        elif self.data["element"] == "earth":
+            if not self.all_earthquake and self.mana >= 100 :
+                self.mana -= 100
+                self.all_earthquake.add(earthquake(self,self.rect.x,self.rect.y,self.facing))
+                earth = pygame.mixer.Sound("Music/sound/earthquake.mp3")
+                earth.play()
+        elif self.data["element"] == "water":
+            if not self.all_ice_spike and self.mana >= 100 :
+                self.mana -= 100
+                self.all_ice_spike.add(ice_spike(self,self.rect.x,self.rect.y,self.facing))
+       
     
     def remover(self):
         for player in self.game.all_playeur:
@@ -124,12 +135,16 @@ class Player(pygame.sprite.Sprite):
             self.mana += self.regen_mana
         if self.mana > self.mana_max:
             self.mana = self.mana_max
+        if self.xp <= self.need_exp:
+            taille = self.xp/self.need_exp*310
+        elif self.xp > self.need_exp:
+            taille = 310
         position_barre_5 = [0, 80, self.mana / self.mana_max * 310, 10]
         position_barre6 = [0, 80, self.mana_max / self.mana_max * 310, 10]
         pygame.draw.rect(surface, (60, 63, 60), position_barre6)
         pygame.draw.rect(surface, (49, 140, 231), position_barre_5)
-        position_barre_3 = [0, 60, self.xp / self.need_exp * 310, 20]
-        position_barre4 = [0, 60, self.need_exp / self.need_exp * 310, 20]
+        position_barre_3 = [0, 60, taille, 20]
+        position_barre4 = [0, 60, 310, 20]
         pygame.draw.rect(surface, (60, 63, 60), position_barre4)
         pygame.draw.rect(surface, (49, 140, 231), position_barre_3)
         position_barre_2 = [80, 17, self.vie / self.viemax * 415, 30]
@@ -140,9 +155,21 @@ class Player(pygame.sprite.Sprite):
             self.level_print = "99999."
         else:
             self.level_print = self.level
+        if self.data["element"] == "aucun":
+            couleur = "white"
+        elif self.data["element"] == "earth":
+            couleur = "Brown"
+        elif self.data["element"] == "water":
+            couleur = "blue"
+        elif self.data["element"] == "wind":
+            couleur = "green"
+        elif self.data["element"] == "fire":
+            couleur = "Red"
+        else:
+            couleur = "grey"
 
         surface.blit(pygame.image.load("Background/in_game/gui.png"),(0,0))
         surface.blit(pygame.font.Font("tool/police/font.ttf", 15).render(self.data["name"], True,"white"),(10,0))
         surface.blit(pygame.font.Font("tool/police/font.ttf", 10).render("xp : "+str(self.xp)+"/"+str(self.need_exp), True, "white"), (50, 70))
         surface.blit(pygame.font.Font("tool/police/font.ttf", 20).render(str(self.level_print), True, "White"), (460, 60))
-        surface.blit(pygame.font.Font("tool/police/font.ttf", 20).render("element", True, "White"), (320, 60))
+        surface.blit(pygame.font.Font("tool/police/font.ttf", 20).render(self.data["element"], True, couleur), (320, 60))

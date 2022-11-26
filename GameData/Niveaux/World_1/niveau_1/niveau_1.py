@@ -52,10 +52,13 @@ class niveau_1:
                 gobelin.update_health_barre(self.screen)
             for earthquake in self.game.player.all_earthquake:
                 earthquake.up_date()
+            for ice_spike in self.game.player.all_ice_spike:
+                ice_spike.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
+            self.game.player.all_ice_spike.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -64,14 +67,14 @@ class niveau_1:
                 pygame.mixer.music.play()
                 self.game.player.remove()
                 return False
-            if self.game.pressed.get(pygame.K_m) == True:
+            if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
-            elif self.game.pressed.get(pygame.K_e) == True:
-                self.game.player.earth_power__earthquake()
-            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
+            elif self.game.pressed.get(pygame.K_d) == True:
+                self.game.player.power_1()
+            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
                 self.game.player.droite()
                 self.facing = 1
-            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0:
+            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0 or self.game.pressed.get(pygame.K_a) and self.game.player.rect.x >= 0:
                 self.facing = 2
                 self.game.player.gauche()
             else : 
@@ -106,11 +109,14 @@ class niveau_1:
                 gobelin.update_health_barre(self.screen)
             for earthquake in self.game.player.all_earthquake:
                 earthquake.up_date()
+            for ice_spike in self.game.player.all_ice_spike:
+                ice_spike.up_date()
 
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
+            self.game.player.all_ice_spike.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -119,14 +125,14 @@ class niveau_1:
                 pygame.mixer.music.play()
                 self.game.player.remove()
                 return False
-            if self.game.pressed.get(pygame.K_m) == True:
+            if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
-            elif self.game.pressed.get(pygame.K_e) == True:
-                self.game.player.earth_power__earthquake()
-            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
+            elif self.game.pressed.get(pygame.K_d) == True:
+                self.game.player.power_1()
+            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
                 self.game.player.droite()
                 self.facing = 1
-            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0:
+            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0 or self.game.pressed.get(pygame.K_a) and self.game.player.rect.x >= 0:
                 self.facing = 2
                 self.game.player.gauche()
             else : 
@@ -160,10 +166,13 @@ class niveau_1:
                 gobelin.update_health_barre(self.screen)
             for earthquake in self.game.player.all_earthquake:
                 earthquake.up_date()
+            for ice_spike in self.game.player.all_ice_spike:
+                ice_spike.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
+            self.game.player.all_ice_spike.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -172,14 +181,14 @@ class niveau_1:
                 pygame.mixer.music.play()
                 self.game.player.remove()
                 return False
-            if self.game.pressed.get(pygame.K_m) == True:
+            if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
-            elif self.game.pressed.get(pygame.K_e) == True:
-                self.game.player.earth_power__earthquake()
-            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
+            elif self.game.pressed.get(pygame.K_d) == True:
+                self.game.player.power_1()
+            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
                 self.game.player.droite()
                 self.facing = 1
-            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0:
+            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0 or self.game.pressed.get(pygame.K_a) and self.game.player.rect.x >= 0:
                 self.facing = 2
                 self.game.player.gauche()
             else : 
@@ -213,10 +222,13 @@ class niveau_1:
                 gobelin.update_health_barre(self.screen)
             for earthquake in self.game.player.all_earthquake:
                 earthquake.up_date()
+            for ice_spike in self.game.player.all_ice_spike:
+                ice_spike.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
+            self.game.player.all_ice_spike.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -225,14 +237,14 @@ class niveau_1:
                 pygame.mixer.music.play()
                 self.game.player.remove()
                 return False
-            if self.game.pressed.get(pygame.K_m) == True:
+            if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
-            elif self.game.pressed.get(pygame.K_e) == True:
-                self.game.player.earth_power__earthquake()
-            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240:
+            elif self.game.pressed.get(pygame.K_d) == True:
+                self.game.player.power_1()
+            elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
                 self.game.player.droite()
                 self.facing = 1
-            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0:
+            elif self.game.pressed.get(pygame.K_LEFT) and self.game.player.rect.x >= 0 or self.game.pressed.get(pygame.K_a) and self.game.player.rect.x >= 0:
                 self.facing = 2
                 self.game.player.gauche()
             else : 

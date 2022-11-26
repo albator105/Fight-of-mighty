@@ -1,1 +1,1 @@
-{"name": "Albator 105", "niveau": 2, "skill_point": 0, "experience": 20, "next_lvl_up": 105, "force": 10, "vie_max": 110}
+{"name": "Player", "niveau": 1, "skill_point": 0, "experience": 0, "next_lvl_up": 100, "force": 10, "vie_max": 100, "mana": 100, "element": "aucun"}
