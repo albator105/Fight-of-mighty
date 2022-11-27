@@ -36,7 +36,7 @@ class dark_player(pygame.sprite.Sprite):
     
     def droite(self):
         self.img += 1
-        if self.img == 9:
+        if self.img == 7:
             self.img = 1
         self.image = pygame.image.load("GameData/entite/dark_player/run/"+str(self.img)+"_right.png")
         self.rect.x += self.vitesse
@@ -44,7 +44,7 @@ class dark_player(pygame.sprite.Sprite):
 
     def gauche(self):
         self.img += 1
-        if self.img == 9:
+        if self.img == 7:
             self.img = 1
         self.image = pygame.image.load("GameData/entite/dark_player/run/"+str(self.img)+"_left.png")
         self.rect.x -= self.vitesse

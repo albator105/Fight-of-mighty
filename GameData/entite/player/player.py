@@ -70,7 +70,8 @@ class Player(pygame.sprite.Sprite):
        
     
     def remover(self):
-        self.game.all_playeur.remove(self)
+        for player in self.game.all_playeur:
+            player.remove()
 
     def damage(self,amount):
         self.vie -= amount
