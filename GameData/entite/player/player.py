@@ -2,6 +2,8 @@ import pygame, time
 from tool.storage import*
 from GameData.entite.earthquake.earthquake import earthquake
 from GameData.entite.ice_spike.ice_spike import ice_spike
+from GameData.entite.tornado.tornado import Tornado
+from GameData.entite.fire_pillar.fire_pillar import fire_pillar
 class Player(pygame.sprite.Sprite):
     def __init__(self,game):
         super().__init__()
@@ -31,21 +33,40 @@ class Player(pygame.sprite.Sprite):
         self.earth_quake = earthquake(self,self.rect.x,self.rect.y,self.facing)
         self.all_ice_spike = pygame.sprite.Group()
         self.ice_spike = ice_spike(self,self.rect.x,self.rect.y,self.facing)
+        self.all_tornado = pygame.sprite.Group()
+        self.tornado = Tornado(self,self.facing)
+        self.all_fire_pillar = pygame.sprite.Group()
+        self.fire_pillar = fire_pillar(self,self.facing)
 
 
     def power_1(self):
         if self.data["element"] == "aucun":
             pass
-        elif self.data["element"] == "earth":
+        if self.data["element"] == "earth" or self.data["element"] == "ADMIN":
             if not self.all_earthquake and self.mana >= 100 :
                 self.mana -= 100
                 self.all_earthquake.add(earthquake(self,self.rect.x,self.rect.y,self.facing))
                 earth = pygame.mixer.Sound("Music/sound/earthquake.mp3")
                 earth.play()
-        elif self.data["element"] == "water":
+        if self.data["element"] == "water" or self.data["element"] == "ADMIN":
             if not self.all_ice_spike and self.mana >= 100 :
                 self.mana -= 100
                 self.all_ice_spike.add(ice_spike(self,self.rect.x,self.rect.y,self.facing))
+                water = pygame.mixer.Sound("Music/sound/ice_spike.mp3")
+                water.play()
+        if self.data["element"] == "wind" or self.data["element"] == "ADMIN":
+            if not self.all_tornado and self.mana >= 100 :
+                self.mana -= 100
+                self.all_tornado.add(Tornado(self,self.facing))
+                wind = pygame.mixer.Sound("Music/sound/tornado.mp3")
+                wind.play()
+        if self.data["element"] == "fire" or self.data["element"] == "ADMIN":
+            if not self.all_fire_pillar and self.mana >= 100 :
+                self.mana -= 100
+                self.all_fire_pillar.add(fire_pillar(self,self.facing))
+                fire = pygame.mixer.Sound("Music/sound/fire_pillar.mp3")
+                fire.play()
+
        
     
     def remover(self):
@@ -100,7 +121,7 @@ class Player(pygame.sprite.Sprite):
         elif facing == 2:
             if self.attaque > 7:
                 self.attaque = 1
-                hit = pygame.mixer.Sound("Music/sound/player_sword.mp3")
+                hit = pygame.mixer.Sound("Music/sound/sword_hit.mp3")
                 hit.play()
                 for gobelin in pygame.sprite.spritecollide(self, self.game.all_gobelin, False):
                     gobelin.damage(self.force)
@@ -165,6 +186,8 @@ class Player(pygame.sprite.Sprite):
             couleur = "green"
         elif self.data["element"] == "fire":
             couleur = "Red"
+        elif self.data["element"] == "ADMIN":
+            couleur = "BLACK"
         else:
             couleur = "grey"
 

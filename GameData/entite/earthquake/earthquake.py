@@ -12,7 +12,7 @@ class earthquake(pygame.sprite.Sprite):
         elif self.facing == 2:
             self.rect.x = pos_player_x-416
         self.img = 1
-        self.degat = 4
+        self.degat = 8
     def remover(self):
         self.player.all_earthquake.remove(self)
 

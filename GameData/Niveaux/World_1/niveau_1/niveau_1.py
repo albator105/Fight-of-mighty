@@ -2,6 +2,7 @@ import pygame, sys
 from GameData.Game import Game
 from random import randint
 from time import sleep
+from tool.storage import stocke_data
 class niveau_1:
     def __init__(self):
         self.screen = pygame.display.set_mode((1280, 710))
@@ -32,6 +33,7 @@ class niveau_1:
         self.game.player.rect.x = 100
         self.game.player.rect.y = 600
         self.game.remove_ennemie()
+        self.game.all_remove()
         for i in range (randint(1,2)):
             self.game.spawn_gobelin(1,4)
         self.game.pressed.clear()
@@ -54,11 +56,17 @@ class niveau_1:
                 earthquake.up_date()
             for ice_spike in self.game.player.all_ice_spike:
                 ice_spike.up_date()
+            for tornado in self.game.player.all_tornado:
+                tornado.up_date()
+            for fire_pillar in self.game.player.all_fire_pillar:
+                fire_pillar.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
             self.game.player.all_ice_spike.draw(self.screen)
+            self.game.player.all_tornado.draw(self.screen)
+            self.game.player.all_fire_pillar.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -69,6 +77,9 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_w) == True and self.game.pressed.get(pygame.K_x) == True:
+                stocke_data("element", "ADMIN")
+                self.game.player.__init__(self.game)
             elif self.game.pressed.get(pygame.K_d) == True:
                 self.game.player.power_1()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
@@ -92,6 +103,7 @@ class niveau_1:
         for i in range (randint(1,3)):
             self.game.spawn_gobelin(2,5)
         self.game.pressed.clear()
+        self.game.all_remove()
         while True:
             self.clock.tick(16)
             self.screen.blit(image, (0, 0))
@@ -111,12 +123,18 @@ class niveau_1:
                 earthquake.up_date()
             for ice_spike in self.game.player.all_ice_spike:
                 ice_spike.up_date()
+            for tornado in self.game.player.all_tornado:
+                tornado.up_date()
+            for fire_pillar in self.game.player.all_fire_pillar:
+                fire_pillar.up_date()
 
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
             self.game.player.all_ice_spike.draw(self.screen)
+            self.game.player.all_tornado.draw(self.screen)
+            self.game.player.all_fire_pillar.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -127,6 +145,9 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_w) == True and self.game.pressed.get(pygame.K_x) == True:
+                stocke_data("element", "ADMIN")
+                self.game.player.__init__(self.game)
             elif self.game.pressed.get(pygame.K_d) == True:
                 self.game.player.power_1()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
@@ -149,6 +170,7 @@ class niveau_1:
         for i in range (randint(2,3)):
             self.game.spawn_gobelin(3,5)
         self.game.pressed.clear()
+        self.game.all_remove()
         while True:
             self.clock.tick(16)
             self.screen.blit(image, (0, 0))
@@ -168,11 +190,17 @@ class niveau_1:
                 earthquake.up_date()
             for ice_spike in self.game.player.all_ice_spike:
                 ice_spike.up_date()
+            for tornado in self.game.player.all_tornado:
+                tornado.up_date()
+            for fire_pillar in self.game.player.all_fire_pillar:
+                fire_pillar.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
             self.game.player.all_ice_spike.draw(self.screen)
+            self.game.player.all_tornado.draw(self.screen)
+            self.game.player.all_fire_pillar.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -183,6 +211,9 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_w) == True and self.game.pressed.get(pygame.K_x) == True:
+                stocke_data("element", "ADMIN")
+                self.game.player.__init__(self.game)
             elif self.game.pressed.get(pygame.K_d) == True:
                 self.game.player.power_1()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :
@@ -205,6 +236,7 @@ class niveau_1:
         for i in range (randint(2,4)):
             self.game.spawn_gobelin(4,7)
         self.game.pressed.clear()
+        self.game.all_remove()
         while True:
             self.clock.tick(16)
             self.screen.blit(image, (0, 0))
@@ -224,11 +256,17 @@ class niveau_1:
                 earthquake.up_date()
             for ice_spike in self.game.player.all_ice_spike:
                 ice_spike.up_date()
+            for tornado in self.game.player.all_tornado:
+                tornado.up_date()
+            for fire_pillar in self.game.player.all_fire_pillar:
+                fire_pillar.up_date()
             
             self.game.all_gobelin.draw(self.screen)
             self.game.all_playeur.draw(self.screen)
             self.game.player.all_earthquake.draw(self.screen)
             self.game.player.all_ice_spike.draw(self.screen)
+            self.game.player.all_tornado.draw(self.screen)
+            self.game.player.all_fire_pillar.draw(self.screen)
 
             
             if self.game.pressed.get(pygame.K_TAB):
@@ -239,6 +277,9 @@ class niveau_1:
                 return False
             if self.game.pressed.get(pygame.K_m) == True or self.game.pressed.get(pygame.K_z) == True:
                 self.game.player.attack(self.facing)
+            elif self.game.pressed.get(pygame.K_w) == True and self.game.pressed.get(pygame.K_x) == True:
+                stocke_data("element", "ADMIN")
+                self.game.player.__init__(self.game)
             elif self.game.pressed.get(pygame.K_d) == True:
                 self.game.player.power_1()
             elif self.game.pressed.get(pygame.K_RIGHT) and self.game.player.rect.x <= 1240 or self.game.pressed.get(pygame.K_e) and self.game.player.rect.x <= 1240 :

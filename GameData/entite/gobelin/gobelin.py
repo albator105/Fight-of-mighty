@@ -36,12 +36,19 @@ class Gobelin(pygame.sprite.Sprite):
     def deplacement_general(self,player_position):
         if pygame.sprite.spritecollide(self, self.game.player.all_earthquake, False):
             self.damage(self.game.player.earth_quake.degat)
+        if pygame.sprite.spritecollide(self, self.game.player.all_fire_pillar, False):
+            self.damage(self.game.player.fire_pillar.degat)
         if pygame.sprite.spritecollide(self, self.game.player.all_ice_spike, False):
             self.damage(self.game.player.ice_spike.degat)
             self.vitesse = 2
-        if pygame.sprite.spritecollide(self, self.game.all_playeur, False):
+        if pygame.sprite.spritecollide(self, self.game.player.all_tornado, False):
+            self.damage(self.game.player.tornado.degat)
+            if self.facing == 1:
+                self.rect.x -= 7
+            if self.facing == 2:
+                self.rect.x += 7
+        if pygame.sprite.spritecollide(self, self.game.all_playeur, False):       
                 self.attack +=1
-
                 if self.facing == 1:
                     self.image = pygame.image.load("GameData/entite/gobelin/attack/"+str(self.attack)+"_right.png")
                 if self.facing == 2:

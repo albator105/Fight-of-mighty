@@ -12,13 +12,13 @@ class ice_spike(pygame.sprite.Sprite):
         elif self.facing == 2:
             self.rect.x = pos_player_x-216
         self.img = 1
-        self.degat = 2
+        self.degat = 5
     def remover(self):
         self.player.all_ice_spike.remove(self)
 
     def up_date(self):
         self.image=pygame.image.load("GameData/entite/ice_spike/"+str(self.img)+".png")
         self.img += 1
-        if self.img == 16:
+        if self.img == 15:
             for ice_spike in self.player.all_ice_spike:
                 ice_spike.remover()

@@ -1,1 +1,14 @@
 pyinstaller --onefile Fight_of_Mighty.py --windowed --icon icon_exe.png
+
+
+
+
+
+
+
+
+
+
+
+
+pyinstaller --onefile change_name.py --windowed --icon icon_exe.png

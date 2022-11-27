@@ -26,3 +26,11 @@ class Game():
             elif event.type == pygame.KEYUP:
                 self.pressed[event.key] = False
 
+    def all_remove(self):
+        for tornado in self.player.all_tornado:
+            tornado.remover()
+        for earthquake in self.player.all_earthquake:
+            earthquake.remover()
+        for ice_spike in self.player.all_ice_spike:
+            ice_spike.remover()
+
