@@ -138,6 +138,8 @@ def menu_play():
                                     code=niveau1.niveau_1_4()
                                     if code:
                                         del code
+                                        code =niveau1.niveau_1_5()
+                                        del code
                                         pygame.mixer.music.load("Music/main.mp3")
                                         pygame.mixer.music.play()
                     if histoire.checkForInput(pos_souris):
@@ -154,6 +156,8 @@ def menu_play():
                                     code=niveau1.niveau_1_4()
                                     if code:
                                         del code
+                                        code = niveau1.niveau_1_5()
+                                        del codee
                                         pygame.mixer.music.load("Music/main.mp3")
                                         pygame.mixer.music.play()
         if not niv1:

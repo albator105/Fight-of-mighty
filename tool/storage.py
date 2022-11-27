@@ -173,7 +173,7 @@ def reinitialisation_data(path="data/data.json"):
                 "skill_point": 0,
                 "experience": 0,
                 "next_lvl_up":100,
-                "force": 10,
+                "force": 20,
                 "vie_max": 100,
                 "mana": 100,
                 "element": "aucun"

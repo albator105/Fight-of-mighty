@@ -73,3 +73,4 @@ class Gobelin(pygame.sprite.Sprite):
             self.rect.x -= self.vitesse
             self.facing == 2
 
+

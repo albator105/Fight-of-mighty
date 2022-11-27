@@ -70,8 +70,7 @@ class Player(pygame.sprite.Sprite):
        
     
     def remover(self):
-        for player in self.game.all_playeur:
-            player.remove()
+        self.game.all_playeur.remove(self)
 
     def damage(self,amount):
         self.vie -= amount
@@ -116,6 +115,8 @@ class Player(pygame.sprite.Sprite):
                 hit.play()
                 for gobelin in pygame.sprite.spritecollide(self, self.game.all_gobelin, False):
                     gobelin.damage(self.force)
+                for dark_player in pygame.sprite.spritecollide(self, self.game.all_dark_playeur, False):
+                    dark_player.damage(self.force)
 
             self.image = pygame.image.load("GameData/entite/player/attack/"+str(self.attaque)+"_right.png")
         elif facing == 2:
@@ -125,6 +126,8 @@ class Player(pygame.sprite.Sprite):
                 hit.play()
                 for gobelin in pygame.sprite.spritecollide(self, self.game.all_gobelin, False):
                     gobelin.damage(self.force)
+                for dark_player in pygame.sprite.spritecollide(self, self.game.all_dark_playeur, False):
+                    dark_player.damage(self.force)
 
             self.image = pygame.image.load("GameData/entite/player/attack/"+str(self.attaque)+"_left.png")
 
